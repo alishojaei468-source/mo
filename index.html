@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>رضا رمضانی | تولید محتوای حرفه‌ای، فیلمبرداری و عکاسی</title>
+<meta name="description" content="پورتفولیوی رضا رمضانی - طراحی گرافیک، فیلمبرداری، عکاسی، تدوین و مدیریت شبکه‌های اجتماعی">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+
+<style>
+  :root{
+    --bg:#090909;
+    --bg-2:#111111;
+    --card:#181818;
+    --text:#ffffff;
+    --text-2:#BDBDBD;
+    --gold:#D4AF37;
+    --gold-hover:#F0C14B;
+    --border:rgba(255,255,255,.08);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Vazirmatn',sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    overflow-x:hidden;
+    cursor:default;
+  }
+  ::selection{background:var(--gold);color:#090909;}
+  a{text-decoration:none;color:inherit;}
+  ul{list-style:none;}
+  button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit;}
+  img{max-width:100%;display:block;}
+
+  /* scrollbar */
+  ::-webkit-scrollbar{width:8px;}
+  ::-webkit-scrollbar-track{background:var(--bg);}
+  ::-webkit-scrollbar-thumb{background:var(--gold);border-radius:10px;}
+
+  .container{max-width:1280px;margin:0 auto;padding:0 32px;}
+  @media(max-width:768px){.container{padding:0 20px;}}
+
+  .gold-text{color:var(--gold);}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:13px;letter-spacing:.5px;color:var(--gold);
+    border:1px solid var(--border);background:rgba(212,175,55,.06);
+    padding:7px 16px;border-radius:999px;margin-bottom:20px;
+  }
+  .eyebrow::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--gold);box-shadow:0 0 8px var(--gold);}
+
+  h1,h2,h3{font-weight:800;letter-spacing:-.5px;line-height:1.25;}
+  .section-title{font-size:clamp(28px,4vw,46px);}
+  p{color:var(--text-2);line-height:1.9;}
+
+  .btn{
+    position:relative;display:inline-flex;align-items:center;gap:10px;
+    padding:16px 34px;border-radius:14px;font-weight:700;font-size:15px;
+    background:linear-gradient(135deg,var(--gold),var(--gold-hover));
+    color:#0a0a0a;overflow:hidden;transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s;
+    box-shadow:0 10px 30px -10px rgba(212,175,55,.4);
+  }
+  .btn:hover{transform:translateY(-3px);box-shadow:0 18px 40px -10px rgba(212,175,55,.55);}
+  .btn span.ripple{position:absolute;border-radius:50%;background:rgba(255,255,255,.5);transform:scale(0);animation:ripple .6s linear;pointer-events:none;}
+  @keyframes ripple{to{transform:scale(4);opacity:0;}}
+
+  .btn-outline{
+    padding:14px 30px;border-radius:14px;border:1px solid var(--border);
+    background:rgba(255,255,255,.02);transition:.35s;font-weight:600;font-size:14px;
+  }
+  .btn-outline:hover{border-color:var(--gold);background:rgba(212,175,55,.08);}
+
+  /* ===== Loader ===== */
+  #loader{
+    position:fixed;inset:0;background:#090909;z-index:9999;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;
+    transition:opacity .8s ease, visibility .8s ease;
+  }
+  #loader.hide{opacity:0;visibility:hidden;}
+  .loader-logo{font-size:46px;font-weight:900;color:var(--gold);position:relative;}
+  .loader-logo svg{width:90px;height:90px;}
+  .loader-logo circle{
+    fill:none;stroke:var(--gold);stroke-width:2;stroke-dasharray:280;stroke-dashoffset:280;
+    animation:drawCircle 1.6s ease forwards;
+  }
+  @keyframes drawCircle{to{stroke-dashoffset:0;}}
+  .loader-text{font-size:13px;color:var(--text-2);letter-spacing:2px;}
+  .loader-percent{font-size:13px;color:var(--gold);font-weight:700;letter-spacing:1px;}
+
+  /* ===== Header ===== */
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:1000;
+    padding:22px 0;transition:.45s ease;
+  }
+  header.scrolled{
+    background:rgba(9,9,9,.7);backdrop-filter:blur(18px);
+    border-bottom:1px solid var(--border);padding:14px 0;
+  }
+  .nav-wrap{display:flex;align-items:center;justify-content:space-between;}
+  .logo{
+    width:44px;height:44px;border:1px solid var(--gold);border-radius:50%;
+    display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--gold);
+    transition:.4s;
+  }
+  .logo:hover{box-shadow:0 0 22px rgba(212,175,55,.5);}
+  nav ul{display:flex;gap:36px;}
+  nav a{
+    font-size:15px;color:var(--text-2);position:relative;transition:.3s;
+  }
+  nav a::after{
+    content:'';position:absolute;right:0;bottom:-8px;width:0;height:1.5px;background:var(--gold);transition:width .35s;
+  }
+  nav a:hover{color:var(--text);}
+  nav a:hover::after{width:100%;}
+  .header-actions{display:flex;align-items:center;gap:18px;}
+  .icon-link{
+    width:38px;height:38px;border:1px solid var(--border);border-radius:50%;
+    display:flex;align-items:center;justify-content:center;transition:.35s;font-size:15px;
+  }
+  .icon-link:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-2px);}
+  .burger{display:none;width:26px;height:18px;position:relative;flex-direction:column;justify-content:space-between;}
+  .burger span{display:block;height:1.5px;background:#fff;border-radius:2px;}
+  @media(max-width:920px){
+    nav{display:none;}
+    .header-actions .icon-link{display:none;}
+    .burger{display:flex;}
+  }
+
+  .mobile-menu{
+    position:fixed;inset:0;background:#0a0a0aee;backdrop-filter:blur(20px);
+    z-index:1100;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:30px;
+    transform:translateY(-100%);transition:transform .5s cubic-bezier(.2,.8,.2,1);
+  }
+  .mobile-menu.open{transform:translateY(0);}
+  .mobile-menu a{font-size:22px;font-weight:700;}
+  .mobile-close{position:absolute;top:30px;left:30px;font-size:28px;color:var(--gold);}
+
+  /* ===== Hero ===== */
+  #hero{
+    position:relative;min-height:100vh;display:flex;align-items:center;
+    padding-top:140px;padding-bottom:80px;overflow:hidden;
+  }
+  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:50px;align-items:center;}
+  @media(max-width:920px){.hero-grid{grid-template-columns:1fr;}}
+  .hero-glow{
+    position:absolute;width:700px;height:700px;border-radius:50%;
+    background:radial-gradient(circle,rgba(212,175,55,.18),transparent 70%);
+    top:-220px;right:-220px;filter:blur(10px);pointer-events:none;
+  }
+  .particle{position:absolute;width:5px;height:5px;border-radius:50%;background:var(--gold);opacity:.5;pointer-events:none;}
+  .hero-eyebrow{font-size:14px;color:var(--text-2);}
+  .hero-heading{font-size:clamp(40px,6vw,76px);margin:18px 0 22px;}
+  .hero-heading .line{display:block;overflow:hidden;}
+  .hero-heading span{display:inline-block;}
+  .hero-desc{max-width:480px;font-size:17px;margin-bottom:36px;}
+  .hero-ctas{display:flex;gap:18px;align-items:center;flex-wrap:wrap;}
+  .avatars{display:flex;align-items:center;gap:14px;margin-top:38px;}
+  .avatars .stack{display:flex;}
+  .avatars .stack div{
+    width:38px;height:38px;border-radius:50%;border:2px solid var(--bg);
+    background:linear-gradient(135deg,#333,#555);margin-right:-12px;
+    display:flex;align-items:center;justify-content:center;font-size:13px;color:#ccc;
+  }
+  .avatars p{font-size:13px;color:var(--text-2);margin:0;}
+  .avatars strong{color:var(--gold);}
+
+  .hero-visual{position:relative;}
+  .hero-frame{
+    position:relative;border-radius:28px;overflow:hidden;aspect-ratio:4/5;
+    background:linear-gradient(160deg,#1a1a1a,#0c0c0c);
+    border:1px solid var(--border);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .hero-frame .placeholder-portrait{
+    width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;
+    background:radial-gradient(circle at 50% 30%, rgba(212,175,55,.12), transparent 60%);
+  }
+  .hero-frame .placeholder-portrait i{font-size:60px;color:var(--gold);opacity:.6;}
+  .hero-frame .placeholder-portrait small{color:var(--text-2);font-size:12px;}
+  .float-tag{
+    position:absolute;background:rgba(17,17,17,.85);backdrop-filter:blur(10px);
+    border:1px solid var(--border);border-radius:14px;padding:10px 16px;
+    font-size:12px;display:flex;align-items:center;gap:8px;animation:floatY 5s ease-in-out infinite;
+  }
+  .float-tag .dot{width:7px;height:7px;border-radius:50%;background:var(--gold);}
+  @keyframes floatY{0%,100%{transform:translateY(0);}50%{transform:translateY(-14px);}}
+
+  .scroll-indicator{
+    position:absolute;bottom:30px;left:50%;transform:translateX(-50%);
+    display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--text-2);font-size:11px;
+  }
+  .scroll-indicator .mouse{
+    width:24px;height:38px;border:1.5px solid var(--text-2);border-radius:14px;position:relative;
+  }
+  .scroll-indicator .mouse span{
+    position:absolute;top:6px;left:50%;transform:translateX(-50%);width:3px;height:7px;
+    background:var(--gold);border-radius:3px;animation:scrollDot 1.6s infinite;
+  }
+  @keyframes scrollDot{0%{opacity:1;top:6px;}100%{opacity:0;top:20px;}}
+
+  /* ===== Section generic ===== */
+  section{position:relative;padding:120px 0;}
+  @media(max-width:768px){section{padding:80px 0;}}
+  .section-head{max-width:640px;margin-bottom:60px;}
+  .section-head.center{margin-inline:auto;text-align:center;}
+
+  /* ===== Portfolio ===== */
+  #portfolio{background:var(--bg-2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+  .portfolio-swiper{width:100%;padding:60px 0 40px;}
+  .portfolio-swiper .swiper-slide{
+    width:260px;height:462px;border-radius:22px;overflow:hidden;position:relative;
+    background:linear-gradient(160deg,#1e1e1e,#101010);border:1px solid var(--border);
+  }
+  .portfolio-swiper .swiper-slide-active{box-shadow:0 30px 70px -20px rgba(212,175,55,.35), 0 0 0 1px rgba(212,175,55,.4);}
+  .story-content{
+    position:absolute;inset:0;display:flex;flex-direction:column;justify-content:space-between;padding:18px;
+  }
+  .story-badge{align-self:flex-end;font-size:11px;background:rgba(0,0,0,.5);padding:5px 10px;border-radius:8px;color:var(--gold);border:1px solid var(--border);}
+  .story-meta{background:rgba(0,0,0,.45);backdrop-filter:blur(6px);border-radius:12px;padding:12px 14px;}
+  .story-meta h4{font-size:14px;margin-bottom:4px;}
+  .story-meta span{font-size:11px;color:var(--text-2);}
+  .story-thumb{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:42px;color:rgba(212,175,55,.5);}
+  .portfolio-nav{display:flex;justify-content:center;gap:18px;margin-top:10px;}
+  .portfolio-nav button{
+    width:46px;height:46px;border-radius:50%;border:1px solid var(--border);
+    display:flex;align-items:center;justify-content:center;transition:.3s;font-size:16px;
+  }
+  .portfolio-nav button:hover{border-color:var(--gold);color:var(--gold);}
+
+  /* fullscreen viewer */
+  #viewer{
+    position:fixed;inset:0;background:rgba(5,5,5,.92);backdrop-filter:blur(20px);
+    z-index:2000;display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;
+    transition:opacity .4s,visibility .4s;
+  }
+  #viewer.open{opacity:1;visibility:visible;}
+  .viewer-card{
+    width:min(360px,80vw);aspect-ratio:9/16;border-radius:24px;overflow:hidden;position:relative;
+    background:linear-gradient(160deg,#1e1e1e,#101010);border:1px solid var(--border);
+    transform:scale(.85);transition:transform .4s;display:flex;align-items:center;justify-content:center;font-size:60px;color:rgba(212,175,55,.5);
+  }
+  #viewer.open .viewer-card{transform:scale(1);}
+  .viewer-close{position:absolute;top:26px;left:26px;font-size:26px;color:#fff;width:44px;height:44px;border:1px solid var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center;}
+  .viewer-arrow{position:absolute;top:50%;transform:translateY(-50%);width:48px;height:48px;border:1px solid var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;}
+  .viewer-arrow.right{right:30px;}
+  .viewer-arrow.left{left:30px;}
+
+  /* ===== Why section ===== */
+  .why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:10px;}
+  @media(max-width:920px){.why-grid{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:560px){.why-grid{grid-template-columns:1fr;}}
+  .why-card{
+    background:var(--card);border:1px solid var(--border);border-radius:20px;padding:32px 26px;
+    transition:.4s;
+  }
+  .why-card:hover{transform:translateY(-8px);border-color:rgba(212,175,55,.4);box-shadow:0 20px 50px -20px rgba(0,0,0,.6);}
+  .why-icon{width:54px;height:54px;border-radius:14px;background:rgba(212,175,55,.1);display:flex;align-items:center;justify-content:center;font-size:24px;color:var(--gold);margin-bottom:18px;}
+  .why-card h3{font-size:18px;margin-bottom:10px;}
+  .why-card p{font-size:14px;}
+  .counters{display:flex;gap:60px;margin-top:50px;flex-wrap:wrap;}
+  .counter-item{text-align:center;}
+  .counter-num{font-size:42px;font-weight:800;color:var(--gold);}
+  .counter-label{font-size:13px;color:var(--text-2);}
+
+  /* ===== Services ===== */
+  .services-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;}
+  @media(max-width:1024px){.services-grid{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:560px){.services-grid{grid-template-columns:1fr;}}
+  .service-card{
+    position:relative;background:var(--card);border:1px solid var(--border);border-radius:20px;
+    padding:30px 24px;overflow:hidden;transition:.45s;
+  }
+  .service-card::before{
+    content:'';position:absolute;inset:0;border-radius:20px;padding:1px;
+    background:linear-gradient(135deg,transparent,rgba(212,175,55,0));
+    opacity:0;transition:.4s;
+  }
+  .service-card:hover{transform:translateY(-6px);box-shadow:0 25px 50px -25px rgba(212,175,55,.25);border-color:rgba(212,175,55,.35);}
+  .service-icon{font-size:26px;color:var(--gold);margin-bottom:18px;display:inline-block;transition:.4s;}
+  .service-card:hover .service-icon{transform:rotate(8deg) scale(1.1);}
+  .service-card h3{font-size:17px;margin-bottom:8px;}
+  .service-card p{font-size:13.5px;}
+
+  /* ===== Pricing ===== */
+  .pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;align-items:center;}
+  @media(max-width:920px){.pricing-grid{grid-template-columns:1fr;}}
+  .price-card{
+    background:var(--card);border:1px solid var(--border);border-radius:24px;padding:40px 30px;
+    text-align:center;transition:.4s;position:relative;
+  }
+  .price-card:hover{transform:translateY(-6px);}
+  .price-card.featured{
+    border:1.5px solid var(--gold);transform:scale(1.06);
+    box-shadow:0 30px 60px -20px rgba(212,175,55,.35);background:linear-gradient(160deg,#1c1a13,#161616);
+  }
+  @media(max-width:920px){.price-card.featured{transform:scale(1);}}
+  .ribbon{
+    position:absolute;top:-14px;right:50%;transform:translateX(50%);
+    background:linear-gradient(135deg,var(--gold),var(--gold-hover));color:#0a0a0a;
+    font-size:12px;font-weight:700;padding:6px 18px;border-radius:999px;
+  }
+  .price-card h3{font-size:18px;margin-bottom:14px;color:var(--text-2);}
+  .price-card .amount{font-size:34px;font-weight:800;color:var(--gold);margin-bottom:24px;}
+  .price-card .amount small{font-size:13px;color:var(--text-2);font-weight:400;}
+  .price-card ul{margin-bottom:30px;text-align:right;display:flex;flex-direction:column;gap:13px;}
+  .price-card ul li{font-size:13.5px;color:var(--text-2);display:flex;align-items:center;gap:10px;justify-content:flex-end;}
+  .price-card ul li i{color:var(--gold);}
+
+  /* ===== About ===== */
+  .about-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:60px;align-items:center;}
+  @media(max-width:920px){.about-grid{grid-template-columns:1fr;}}
+  .about-portrait{
+    aspect-ratio:3/4;border-radius:24px;background:linear-gradient(160deg,#1a1a1a,#0c0c0c);
+    border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:50px;color:rgba(212,175,55,.4);
+  }
+  .about-counters{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:30px;}
+  .about-counters div{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:20px;text-align:center;}
+
+  /* ===== Process timeline ===== */
+  .timeline{display:flex;justify-content:space-between;position:relative;margin-top:60px;flex-wrap:wrap;gap:30px;}
+  .timeline::before{content:'';position:absolute;top:24px;right:0;left:0;height:1px;background:var(--border);}
+  .timeline-step{flex:1;min-width:140px;text-align:center;position:relative;}
+  .timeline-dot{
+    width:50px;height:50px;border-radius:50%;background:var(--bg);border:1px solid var(--gold);
+    display:flex;align-items:center;justify-content:center;margin:0 auto 16px;color:var(--gold);font-weight:700;
+    position:relative;z-index:2;
+  }
+  .timeline-step h4{font-size:14px;margin-bottom:6px;}
+  .timeline-step p{font-size:12px;}
+
+  /* ===== Marquee ===== */
+  .marquee-wrap{overflow:hidden;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:36px 0;}
+  .marquee-track{display:flex;gap:80px;width:max-content;animation:marquee 28s linear infinite;}
+  .marquee-wrap:hover .marquee-track{animation-play-state:paused;}
+  @keyframes marquee{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+  .marquee-track span{font-size:22px;font-weight:700;color:var(--text-2);opacity:.5;white-space:nowrap;}
+
+  /* ===== Testimonials ===== */
+  .test-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;}
+  @media(max-width:920px){.test-grid{grid-template-columns:1fr;}}
+  .test-card{
+    background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:20px;padding:28px;
+    backdrop-filter:blur(10px);transition:transform .4s;
+  }
+  .test-card:hover{transform:perspective(800px) rotateX(2deg) rotateY(-2deg) translateY(-6px);}
+  .stars{color:var(--gold);font-size:13px;margin-bottom:14px;}
+  .test-card p{font-size:14px;margin-bottom:20px;}
+  .test-person{display:flex;align-items:center;gap:12px;}
+  .test-avatar{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#333,#555);}
+  .test-person h5{font-size:13.5px;}
+  .test-person span{font-size:11.5px;color:var(--text-2);}
+
+  /* ===== FAQ ===== */
+  .faq-item{border-bottom:1px solid var(--border);}
+  .faq-q{
+    display:flex;justify-content:space-between;align-items:center;padding:22px 4px;cursor:pointer;
+    font-size:16px;font-weight:600;
+  }
+  .faq-q i{color:var(--gold);transition:.35s;}
+  .faq-item.active .faq-q i{transform:rotate(45deg);}
+  .faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease;}
+  .faq-a p{padding:0 4px 22px;font-size:14px;}
+
+  /* ===== Contact ===== */
+  .contact-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:60px;}
+  @media(max-width:920px){.contact-grid{grid-template-columns:1fr;}}
+  .contact-list{display:flex;flex-direction:column;gap:18px;margin-top:30px;}
+  .contact-item{display:flex;align-items:center;gap:14px;}
+  .contact-item .icon-link{flex-shrink:0;}
+  .contact-item h5{font-size:14px;}
+  .contact-item span{font-size:13px;color:var(--text-2);}
+
+  .field{position:relative;margin-bottom:26px;}
+  .field input,.field textarea{
+    width:100%;background:transparent;border:1px solid var(--border);border-radius:12px;
+    padding:18px 16px;color:#fff;font-size:14px;transition:.3s;font-family:inherit;
+  }
+  .field textarea{min-height:120px;resize:none;}
+  .field input:focus,.field textarea:focus{outline:none;border-color:var(--gold);}
+  .field label{
+    position:absolute;right:16px;top:18px;color:var(--text-2);font-size:14px;pointer-events:none;
+    transition:.25s;background:var(--bg);padding:0 6px;
+  }
+  .field input:focus + label,.field input:not(:placeholder-shown) + label,
+  .field textarea:focus + label,.field textarea:not(:placeholder-shown) + label{
+    top:-9px;font-size:12px;color:var(--gold);
+  }
+  .form-success{
+    display:none;align-items:center;gap:10px;background:rgba(212,175,55,.1);border:1px solid var(--gold);
+    border-radius:12px;padding:16px;color:var(--gold);font-size:14px;margin-top:16px;
+  }
+  .form-success.show{display:flex;}
+
+  /* ===== Footer ===== */
+  footer{padding:50px 0 30px;border-top:1px solid var(--border);}
+  .footer-grid{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;}
+  .footer-social{display:flex;gap:14px;}
+
+  /* reveal utility */
+  .reveal{opacity:0;transform:translateY(40px);}
+  .fade-line{overflow:hidden;}
+
+  [data-cursor]{cursor:none;}
+  .cursor-dot{
+    position:fixed;width:10px;height:10px;border-radius:50%;background:var(--gold);
+    pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:opacity .3s;
+    mix-blend-mode:difference;
+  }
+  @media(max-width:920px){.cursor-dot{display:none;}}
+</style>
+</head>
+<body>
+
+<div id="loader">
+  <div class="loader-logo">
+    <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="44"/></svg>
+  </div>
+  <div class="loader-text">در حال بارگذاری تجربه</div>
+  <div class="loader-percent" id="loadPercent">0%</div>
+</div>
+
+<div class="cursor-dot" id="cursorDot"></div>
+
+<header id="header">
+  <div class="container nav-wrap">
+    <a href="#hero" class="logo">ر</a>
+    <nav>
+      <ul>
+        <li><a href="#hero">خانه</a></li>
+        <li><a href="#portfolio">نمونه کارها</a></li>
+        <li><a href="#services">خدمات</a></li>
+        <li><a href="#pricing">تعرفه‌ها</a></li>
+        <li><a href="#about">درباره من</a></li>
+        <li><a href="#contact">تماس</a></li>
+      </ul>
+    </nav>
+    <div class="header-actions">
+      <a href="#" class="icon-link"><i class="fa-brands fa-instagram"></i>📷</a>
+      <a href="#" class="icon-link">✈️</a>
+      <a href="#contact" class="btn" style="padding:12px 26px;font-size:13.5px;">مشاوره رایگان</a>
+      <div class="burger" id="burger"><span></span><span></span><span></span></div>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-close" id="mobileClose">×</div>
+  <a href="#hero">خانه</a>
+  <a href="#portfolio">نمونه کارها</a>
+  <a href="#services">خدمات</a>
+  <a href="#pricing">تعرفه‌ها</a>
+  <a href="#about">درباره من</a>
+  <a href="#contact">تماس</a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-glow"></div>
+  <div class="container hero-grid">
+    <div>
+      <div class="hero-eyebrow eyebrow">تولید محتوای حرفه‌ای دیجیتال</div>
+      <h1 class="hero-heading">
+        <span class="fade-line"><span>محتوا را به</span></span>
+        <span class="fade-line"><span>ما <span class="gold-text">بسپار</span></span></span>
+      </h1>
+      <p class="hero-desc reveal">تولید محتوای حرفه‌ای، فیلمبرداری، تدوین، طراحی و مدیریت شبکه‌های اجتماعی برای برندهایی که می‌خواهند دیده شوند و بمانند.</p>
+      <div class="hero-ctas reveal">
+        <a href="#portfolio" class="btn">مشاهده نمونه کارها <i class="fa-solid fa-arrow-left-long"></i></a>
+        <a href="#contact" class="btn-outline">شروع همکاری</a>
+      </div>
+      <div class="avatars reveal">
+        <div class="stack">
+          <div>A</div><div>R</div><div>M</div>
+        </div>
+        <p>بیش از <strong>۵۰</strong> برند از همکاری راضی هستند</p>
+      </div>
+    </div>
+
+    <div class="hero-visual reveal">
+      <div class="hero-frame">
+        <div class="placeholder-portrait">
+          <i class="fa-solid fa-camera-retro"></i>
+          <small>تصویر پرتره حرفه‌ای شما اینجا قرار می‌گیرد</small>
+        </div>
+      </div>
+      <div class="float-tag" style="top:8%;left:-6%;animation-delay:0s;"><span class="dot"></span> Cinema Camera</div>
+      <div class="float-tag" style="bottom:14%;left:-10%;animation-delay:1.2s;"><span class="dot"></span> Color Grading 4K</div>
+      <div class="float-tag" style="top:42%;right:-8%;animation-delay:.6s;"><span class="dot"></span> Drone Ready</div>
+    </div>
+  </div>
+
+  <div class="scroll-indicator">
+    <span>اسکرول کنید</span>
+    <div class="mouse"><span></span></div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section id="portfolio">
+  <div class="container">
+    <div class="section-head center reveal">
+      <div class="eyebrow">نمونه کارها</div>
+      <h2 class="section-title">نمونه‌ کارهای منتخب</h2>
+      <p>بخشی از پروژه‌های اخیر تولید محتوا، فیلمبرداری و طراحی</p>
+    </div>
+  </div>
+
+  <div class="swiper portfolio-swiper">
+    <div class="swiper-wrapper" id="portfolioWrapper"></div>
+  </div>
+  <div class="portfolio-nav">
+    <button id="prevSlide"><i class="fa-solid fa-arrow-right"></i></button>
+    <button id="nextSlide"><i class="fa-solid fa-arrow-left"></i></button>
+  </div>
+</section>
+
+<div id="viewer">
+  <div class="viewer-close" id="viewerClose"><i class="fa-solid fa-xmark"></i></div>
+  <div class="viewer-arrow right" id="viewerNext"><i class="fa-solid fa-arrow-right"></i></div>
+  <div class="viewer-arrow left" id="viewerPrev"><i class="fa-solid fa-arrow-left"></i></div>
+  <div class="viewer-card" id="viewerCard"><i class="fa-solid fa-photo-film"></i></div>
+</div>
+
+<!-- WHY -->
+<section id="why">
+  <div class="container">
+    <div class="section-head center reveal">
+      <div class="eyebrow">چرا تولید محتوا؟</div>
+      <h2 class="section-title">چرا تولید محتوا برای کسب‌وکار شما حیاتی است؟</h2>
+      <p>محتوای حرفه‌ای پلی است بین برند شما و مخاطب؛ محتوای هدفمند می‌تواند اعتمادسازی کند.</p>
+    </div>
+
+    <div class="why-grid">
+      <div class="why-card reveal">
+        <div class="why-icon"><i class="fa-solid fa-chart-line"></i></div>
+        <h3>افزایش فروش و تبدیل</h3>
+        <p>جذب مشتریان جدید، افزایش فروش در زمان کمتر و ایجاد مخاطبه‌سازی.</p>
+      </div>
+      <div class="why-card reveal">
+        <div class="why-icon"><i class="fa-solid fa-bullseye"></i></div>
+        <h3>برندسازی حرفه‌ای</h3>
+        <p>حضور قدرتمند در رقابت با هویت بصری ثابت و حرفه‌ای.</p>
+      </div>
+      <div class="why-card reveal">
+        <div class="why-icon"><i class="fa-solid fa-handshake"></i></div>
+        <h3>اعتمادسازی و وفاداری</h3>
+        <p>ارتباط موثر با مشتری و محتوای ماندگار برای رشد بلندمدت برند.</p>
+      </div>
+    </div>
+
+    <div class="counters reveal">
+      <div class="counter-item"><div class="counter-num" data-count="120">0</div><div class="counter-label">پروژه موفق</div></div>
+      <div class="counter-item"><div class="counter-num" data-count="50">0</div><div class="counter-label">برند همکار</div></div>
+      <div class="counter-item"><div class="counter-num" data-count="3">0</div><div class="counter-label">سال تجربه</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" style="background:var(--bg-2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+  <div class="container">
+    <div class="section-head center reveal">
+      <div class="eyebrow">خدمات</div>
+      <h2 class="section-title">خدماتی که ارائه می‌دهم</h2>
+      <p>از ایده تا اجرا، تمام مراحل تولید محتوای بصری برند شما</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card reveal"><i class="fa-solid fa-pen-nib service-icon"></i><h3>طراحی گرافیک</h3><p>طراحی پست، هویت بصری و محتوای بصری برند</p></div>
+      <div class="service-card reveal"><i class="fa-solid fa-film service-icon"></i><h3>ریلز اینستاگرام</h3><p>تولید ریلز خلاقانه برای رشد و دیده‌شدن صفحه</p></div>
+      <div class="service-card reveal"><i class="fa-solid fa-book-open service-icon"></i><h3>استوری اینستاگرام</h3><p>طراحی و تولید استوری حرفه‌ای و جذاب</p></div>
+      <div class="service-card reveal"><i class="fa-solid fa-clapperboard service-icon"></i><h3>فیلمبرداری حرفه‌ای</h3><p>فیلمبرداری سینمایی با تجهیزات استاندارد</p></div>
+      <div class="service-card reveal"><i class="fa-solid fa-camera service-icon"></i><h3>عکاسی تجاری</h3><p>عکاسی محصول، پرتره و عکاسی صنعتی</p></div>
+      <div class="service-card reveal"><i class="fa-solid fa-helicopter service-icon"></i><h3>فیلمبرداری هوایی</h3><p>تصویربرداری با پهپاد برای نمای سینمایی</p></div>
+      <div class="service-card reveal"><i class="fa-solid fa-scissors service-icon"></i><h3>تدوین ویدیو</h3><p>تدوین حرفه‌ای با رنگ‌بندی سینمایی</p></div>
+      <div class="service-card reveal"><i class="fa-solid fa-bullhorn service-icon"></i><h3>تبلیغات تجاری</h3><p>ساخت محتوای تبلیغاتی برای کمپین‌های فروش</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="container">
+    <div class="section-head center reveal">
+      <div class="eyebrow">تعرفه‌ها</div>
+      <h2 class="section-title">تعرفه‌های همکاری</h2>
+      <p>پلن مناسب با نیاز و بودجه خودتان را انتخاب کنید</p>
+    </div>
+
+    <div class="pricing-grid">
+      <div class="price-card reveal">
+        <h3>اقتصادی</h3>
+        <div class="amount">۵,۰۰۰,۰۰۰ <small>تومان</small></div>
+        <ul>
+          <li><i class="fa-solid fa-check"></i> فیلمبرداری با موبایل/تجهیزات پایه</li>
+          <li><i class="fa-solid fa-check"></i> تدوین ساده (تا ۱۵ ثانیه)</li>
+          <li><i class="fa-solid fa-check"></i> طراحی گرافیک ساده</li>
+          <li><i class="fa-solid fa-check"></i> ۱ پست + ۴ استوری در ماه</li>
+          <li><i class="fa-solid fa-check"></i> پشتیبانی تا ۳ روزه</li>
+        </ul>
+        <a href="#contact" class="btn-outline" style="display:block;text-align:center;">انتخاب پلن اقتصادی</a>
+      </div>
+
+      <div class="price-card featured reveal">
+        <div class="ribbon">پیشنهاد ویژه</div>
+        <h3 style="color:var(--gold);">طلایی</h3>
+        <div class="amount">۱۵,۰۰۰,۰۰۰ <small>تومان</small></div>
+        <ul>
+          <li><i class="fa-solid fa-check"></i> فیلمبرداری با تجهیزات حرفه‌ای</li>
+          <li><i class="fa-solid fa-check"></i> تدوین حرفه‌ای (تا ۹۰ ثانیه)</li>
+          <li><i class="fa-solid fa-check"></i> طراحی گرافیک حرفه‌ای</li>
+          <li><i class="fa-solid fa-check"></i> ۲ پست + ۲۰ استوری + ۲ ریلز در ماه</li>
+          <li><i class="fa-solid fa-check"></i> پشتیبانی ویژه و مشاوره</li>
+        </ul>
+        <a href="#contact" class="btn" style="display:block;text-align:center;">انتخاب پلن طلایی</a>
+      </div>
+
+      <div class="price-card reveal">
+        <h3>نقره‌ای</h3>
+        <div class="amount">۸,۵۰۰,۰۰۰ <small>تومان</small></div>
+        <ul>
+          <li><i class="fa-solid fa-check"></i> فیلمبرداری با تجهیزات پایه</li>
+          <li><i class="fa-solid fa-check"></i> تدوین حرفه‌ای (تا ۳۰ ثانیه)</li>
+          <li><i class="fa-solid fa-check"></i> طراحی گرافیک پایه</li>
+          <li><i class="fa-solid fa-check"></i> ۱ پست + ۸ استوری در ماه</li>
+          <li><i class="fa-solid fa-check"></i> پشتیبانی تا ۷ روزه</li>
+        </ul>
+        <a href="#contact" class="btn-outline" style="display:block;text-align:center;">انتخاب پلن نقره‌ای</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" style="background:var(--bg-2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+  <div class="container about-grid">
+    <div class="about-portrait reveal"><i class="fa-solid fa-user"></i></div>
+    <div class="reveal">
+      <div class="eyebrow">درباره من</div>
+      <h2 class="section-title" style="margin-bottom:18px;">رضا رمضانی</h2>
+      <p>من رضا رمضانی، طراح گرافیک و تولیدکننده محتوای دیجیتال هستم. تمرکز بر فیلمبرداری، تدوین و مدیریت شبکه‌های اجتماعی دارم. در کنار کسب‌وکارها هستم تا با محتوای خلاقانه، برند آن‌ها را به سطح بالاتری برسانم.</p>
+      <div class="about-counters">
+        <div><div class="counter-num" data-count="3">0</div><div class="counter-label" style="font-size:12px;">سال تجربه</div></div>
+        <div><div class="counter-num" data-count="120">0</div><div class="counter-label" style="font-size:12px;">پروژه موفق</div></div>
+        <div><div class="counter-num" data-count="50">0</div><div class="counter-label" style="font-size:12px;">برند همکار</div></div>
+      </div>
+      <a href="#contact" class="btn-outline" style="margin-top:30px;display:inline-block;">بیشتر درباره من</a>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process">
+  <div class="container">
+    <div class="section-head center reveal">
+      <div class="eyebrow">روند کاری</div>
+      <h2 class="section-title">فرآیند همکاری</h2>
+    </div>
+    <div class="timeline">
+      <div class="timeline-step reveal"><div class="timeline-dot">۱</div><h4>جلسه آشنایی</h4><p>شناخت نیاز و هدف برند شما</p></div>
+      <div class="timeline-step reveal"><div class="timeline-dot">۲</div><h4>برنامه‌ریزی</h4><p>تدوین استراتژی محتوایی</p></div>
+      <div class="timeline-step reveal"><div class="timeline-dot">۳</div><h4>فیلمبرداری</h4><p>اجرای پروژه با تجهیزات حرفه‌ای</p></div>
+      <div class="timeline-step reveal"><div class="timeline-dot">۴</div><h4>تدوین</h4><p>ادیت و رنگ‌بندی سینمایی</p></div>
+      <div class="timeline-step reveal"><div class="timeline-dot">۵</div><h4>تحویل</h4><p>تحویل نهایی محتوا به برند</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CLIENT LOGOS MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track" id="marqueeTrack"></div>
+</div>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="container">
+    <div class="section-head center reveal">
+      <div class="eyebrow">نظر مشتریان</div>
+      <h2 class="section-title">آنچه مشتریان درباره همکاری با من می‌گویند</h2>
+    </div>
+    <div class="test-grid">
+      <div class="test-card reveal">
+        <div class="stars">★★★★★</div>
+        <p>همکاری با رضا باعث رشد بیج اینستاگرام ما و افزایش فروش شد.</p>
+        <div class="test-person"><div class="test-avatar"></div><div><h5>محمد احمدی</h5><span>مدیر برند بوتیکا</span></div></div>
+      </div>
+      <div class="test-card reveal">
+        <div class="stars">★★★★★</div>
+        <p>کیفیت بالا، تعهد زمانی و خلاقیت در محتوا عالی بود.</p>
+        <div class="test-person"><div class="test-avatar"></div><div><h5>سارا محمدی</h5><span>مدیر برند آرایشی</span></div></div>
+      </div>
+      <div class="test-card reveal">
+        <div class="stars">★★★★★</div>
+        <p>تیم حرفه‌ای و پاسخگو، واقعا از نتیجه کار راضی هستیم.</p>
+        <div class="test-person"><div class="test-avatar"></div><div><h5>علی رضایی</h5><span>مدیر شرکت بازرگانی</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ & CONTACT -->
+<section id="faq-contact" style="background:var(--bg-2);border-top:1px solid var(--border);">
+  <div class="container" style="display:grid;grid-template-columns:1fr 1fr;gap:60px;">
+    <div class="reveal">
+      <div class="eyebrow">سوالات متداول</div>
+      <h2 class="section-title" style="margin-bottom:30px;">سوالات متداول</h2>
+      <div id="faqList">
+        <div class="faq-item active">
+          <div class="faq-q">مدت زمان تحویل پروژه چقدر است؟ <i class="fa-solid fa-plus"></i></div>
+          <div class="faq-a"><p>بسته به نوع پروژه، معمولاً بین ۳ تا ۷ روز کاری زمان نیاز است.</p></div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">آیا امکان بازنگری وجود دارد؟ <i class="fa-solid fa-plus"></i></div>
+          <div class="faq-a"><p>بله، در هر پلن تعداد مشخصی بازنگری رایگان شامل می‌شود.</p></div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">تجهیزات مورد استفاده چیست؟ <i class="fa-solid fa-plus"></i></div>
+          <div class="faq-a"><p>از دوربین‌های سینمایی، گیمبال، لنزهای حرفه‌ای و نورپردازی استودیویی استفاده می‌شود.</p></div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">آیا قرارداد رسمی دارید؟ <i class="fa-solid fa-plus"></i></div>
+          <div class="faq-a"><p>بله، پیش از شروع همکاری قرارداد رسمی همراه با شرایط تنظیم می‌شود.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="contact" class="reveal">
+      <div class="eyebrow">تماس با من</div>
+      <h2 class="section-title" style="margin-bottom:14px;">تماس با من</h2>
+      <p style="margin-bottom:30px;">برای مشاوره رایگان و دریافت اطلاعات بیشتر با من در ارتباط باشید</p>
+      <form id="contactForm">
+        <div class="field">
+          <input type="text" placeholder=" " required>
+          <label>نام و نام خانوادگی</label>
+        </div>
+        <div class="field">
+          <input type="tel" placeholder=" " required>
+          <label>شماره تماس</label>
+        </div>
+        <div class="field">
+          <textarea placeholder=" " required></textarea>
+          <label>توضیحات پروژه</label>
+        </div>
+        <button type="submit" class="btn" style="width:100%;justify-content:center;">درخواست مشاوره رایگان</button>
+        <div class="form-success" id="formSuccess"><i class="fa-solid fa-circle-check"></i> پیام شما با موفقیت ارسال شد!</div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container footer-grid">
+    <div class="logo">ر</div>
+    <p style="font-size:13px;margin:0;">© ۱۴۰۴ تمام حقوق این سایت محفوظ است | طراحی و توسعه توسط رضا رمضانی</p>
+    <div class="footer-social">
+      <a href="#" class="icon-link"><i class="fa-brands fa-instagram"></i></a>
+      <a href="#" class="icon-link"><i class="fa-brands fa-telegram"></i></a>
+      <a href="#" class="icon-link"><i class="fa-brands fa-whatsapp"></i></a>
+    </div>
+  </div>
+</footer>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+<script>
+/* ===== Safety fallback: ensure content is visible even if CDN libs fail ===== */
+(function(){
+  function forceVisible(){
+    document.querySelectorAll('.reveal, .hero-heading .line span, .hero-desc, .hero-ctas, .avatars, .hero-visual, .why-card, .service-card, .price-card, .test-card, .timeline-step').forEach(function(el){
+      el.style.opacity = 1; el.style.transform = 'none';
+    });
+    var ld = document.getElementById('loader');
+    if(ld) ld.classList.add('hide');
+  }
+  if (typeof gsap === 'undefined') {
+    forceVisible();
+  }
+  window.addEventListener('error', function(){ forceVisible(); });
+})();
+</script>
+<script>
+gsap.registerPlugin(ScrollTrigger);
+
+
+/* ===== Loader ===== */
+let pct = 0;
+const percentEl = document.getElementById('loadPercent');
+const loadInterval = setInterval(()=>{
+  pct += Math.floor(Math.random()*12)+4;
+  if(pct>=100){ pct=100; clearInterval(loadInterval);
+    setTimeout(()=>{ document.getElementById('loader').classList.add('hide'); playHero(); }, 350);
+  }
+  percentEl.textContent = pct+'%';
+}, 180);
+// safety net: force-hide loader after 4s no matter what
+setTimeout(()=>{ document.getElementById('loader').classList.add('hide'); }, 4000);
+
+/* ===== Header scroll state ===== */
+const header = document.getElementById('header');
+window.addEventListener('scroll', ()=>{
+  header.classList.toggle('scrolled', window.scrollY > 40);
+});
+
+/* ===== Mobile menu ===== */
+const burger = document.getElementById('burger');
+const mobileMenu = document.getElementById('mobileMenu');
+burger.addEventListener('click', ()=> mobileMenu.classList.add('open'));
+document.getElementById('mobileClose').addEventListener('click', ()=> mobileMenu.classList.remove('open'));
+mobileMenu.querySelectorAll('a').forEach(a=> a.addEventListener('click', ()=> mobileMenu.classList.remove('open')));
+
+/* ===== Cursor glow ===== */
+const cursorDot = document.getElementById('cursorDot');
+window.addEventListener('mousemove', e=>{
+  cursorDot.style.left = e.clientX+'px';
+  cursorDot.style.top = e.clientY+'px';
+});
+
+/* ===== Magnetic buttons ===== */
+document.querySelectorAll('.btn').forEach(btn=>{
+  btn.addEventListener('mousemove', e=>{
+    const r = btn.getBoundingClientRect();
+    const x = e.clientX - r.left - r.width/2;
+    const y = e.clientY - r.top - r.height/2;
+    gsap.to(btn, {x:x*0.25, y:y*0.25, duration:.3, ease:'power2.out'});
+  });
+  btn.addEventListener('mouseleave', ()=> gsap.to(btn,{x:0,y:0,duration:.4,ease:'power3.out'}));
+  btn.addEventListener('click', function(e){
+    const ripple = document.createElement('span');
+    ripple.className='ripple';
+    const rect = this.getBoundingClientRect();
+    ripple.style.left = (e.clientX-rect.left)+'px';
+    ripple.style.top = (e.clientY-rect.top)+'px';
+    ripple.style.width = ripple.style.height = '10px';
+    this.appendChild(ripple);
+    setTimeout(()=>ripple.remove(),600);
+  });
+});
+
+/* ===== Hero intro animation ===== */
+function playHero(){
+  gsap.timeline()
+    .to('.hero-heading .line span', {y:0, opacity:1, duration:.9, stagger:.12, ease:'power3.out'}, 0)
+    .fromTo('.hero-heading .line span', {y:60,opacity:0}, {y:0,opacity:1,duration:.9,stagger:.12,ease:'power3.out'},0)
+    .to('.hero-desc, .hero-ctas, .avatars, .hero-visual', {opacity:1,y:0,duration:.8,stagger:.12,ease:'power3.out'}, .4);
+}
+gsap.set('.hero-heading .line span', {y:60, opacity:0});
+gsap.set('.hero-desc, .hero-ctas, .avatars, .hero-visual', {opacity:0, y:30});
+
+/* floating particles in hero */
+const heroEl = document.getElementById('hero');
+for(let i=0;i<18;i++){
+  const p = document.createElement('div');
+  p.className='particle';
+  p.style.left = Math.random()*100+'%';
+  p.style.top = Math.random()*100+'%';
+  heroEl.appendChild(p);
+  gsap.to(p, {y:'-=' + (Math.random()*120+60), x:'+=' + (Math.random()*60-30), opacity:0, duration: Math.random()*6+5, repeat:-1, ease:'sine.inOut', delay:Math.random()*5});
+}
+/* mouse parallax */
+heroEl.addEventListener('mousemove', e=>{
+  const x = (e.clientX/window.innerWidth - .5) * 20;
+  const y = (e.clientY/window.innerHeight - .5) * 20;
+  gsap.to('.hero-visual', {x:x, y:y, duration:.6, ease:'power2.out'});
+});
+
+/* ===== Scroll reveal ===== */
+document.querySelectorAll('.reveal').forEach(el=>{
+  gsap.fromTo(el, {opacity:0,y:50}, {
+    opacity:1, y:0, duration:1, ease:'power3.out',
+    scrollTrigger:{ trigger: el, start:'top 85%' }
+  });
+});
+gsap.utils.toArray('.why-card, .service-card, .price-card, .test-card, .timeline-step').forEach((el,i)=>{
+  gsap.fromTo(el, {opacity:0,y:40,scale:.96}, {
+    opacity:1,y:0,scale:1,duration:.8,ease:'power3.out',delay:(i%4)*0.08,
+    scrollTrigger:{ trigger: el, start:'top 88%' }
+  });
+});
+
+/* ===== Counters ===== */
+document.querySelectorAll('.counter-num').forEach(el=>{
+  const target = +el.dataset.count;
+  ScrollTrigger.create({
+    trigger: el, start:'top 90%', once:true,
+    onEnter:()=>{
+      gsap.to(el, { innerText: target, duration:1.6, snap:'innerText', ease:'power2.out',
+        onUpdate(){ el.innerText = Math.floor(el.innerText)+'+'; } });
+    }
+  });
+});
+
+/* ===== Portfolio data + Swiper coverflow ===== */
+const portfolioData = [
+  {icon:'fa-camera-retro', title:'کمپین رادو', meta:'فیلمبرداری تجاری'},
+  {icon:'fa-clapperboard', title:'تیزر برند بوتیکا', meta:'موشن گرافیک'},
+  {icon:'fa-mobile-screen-button', title:'ریلز اینستاگرام', meta:'تولید محتوا'},
+  {icon:'fa-paintbrush', title:'پوستر تبلیغاتی', meta:'طراحی گرافیک'},
+  {icon:'fa-images', title:'قبل و بعد رتوش', meta:'عکاسی محصول'},
+  {icon:'fa-film', title:'بک‌استیج فیلمبرداری', meta:'پشت صحنه'},
+];
+const wrapper = document.getElementById('portfolioWrapper');
+portfolioData.forEach(item=>{
+  const slide = document.createElement('div');
+  slide.className='swiper-slide';
+  slide.innerHTML = `
+    <div class="story-thumb"><i class="fa-solid ${item.icon}"></i></div>
+    <div class="story-content">
+      <div class="story-badge">استوری</div>
+      <div class="story-meta"><h4>${item.title}</h4><span>${item.meta}</span></div>
+    </div>`;
+  slide.addEventListener('click', ()=> openViewer(item));
+  wrapper.appendChild(slide);
+});
+
+const portfolioSwiper = new Swiper('.portfolio-swiper', {
+  effect:'coverflow',
+  grabCursor:true,
+  centeredSlides:true,
+  slidesPerView:'auto',
+  loop:true,
+  autoplay:{ delay:5000, disableOnInteraction:false },
+  coverflowEffect:{ rotate:35, stretch:0, depth:200, modifier:1, slideShadows:false },
+  mousewheel:{ forceToAxis:true },
+  keyboard:{ enabled:true },
+});
+document.getElementById('prevSlide').addEventListener('click', ()=>portfolioSwiper.slidePrev());
+document.getElementById('nextSlide').addEventListener('click', ()=>portfolioSwiper.slideNext());
+
+/* ===== Fullscreen viewer ===== */
+const viewer = document.getElementById('viewer');
+const viewerCard = document.getElementById('viewerCard');
+function openViewer(item){
+  viewerCard.innerHTML = `<i class="fa-solid ${item.icon}"></i>`;
+  viewer.classList.add('open');
+}
+document.getElementById('viewerClose').addEventListener('click', ()=> viewer.classList.remove('open'));
+viewer.addEventListener('click', e=>{ if(e.target===viewer) viewer.classList.remove('open'); });
+document.getElementById('viewerNext').addEventListener('click', ()=> openViewer(portfolioData[Math.floor(Math.random()*portfolioData.length)]));
+document.getElementById('viewerPrev').addEventListener('click', ()=> openViewer(portfolioData[Math.floor(Math.random()*portfolioData.length)]));
+window.addEventListener('keydown', e=>{ if(e.key==='Escape') viewer.classList.remove('open'); });
+
+/* ===== Marquee logos ===== */
+const logos = ['برند آلفا','استودیو لوکس','بوتیکا','کافه روما','گروه آرتین','برند نوین','شرکت بازرگانی','مدیا پلاس'];
+const track = document.getElementById('marqueeTrack');
+[...logos,...logos].forEach(l=>{
+  const span = document.createElement('span');
+  span.textContent = l;
+  track.appendChild(span);
+});
+
+/* ===== FAQ accordion ===== */
+document.querySelectorAll('.faq-item').forEach(item=>{
+  const q = item.querySelector('.faq-q');
+  const a = item.querySelector('.faq-a');
+  if(item.classList.contains('active')) a.style.maxHeight = a.scrollHeight+'px';
+  q.addEventListener('click', ()=>{
+    const isActive = item.classList.contains('active');
+    document.querySelectorAll('.faq-item').forEach(i=>{ i.classList.remove('active'); i.querySelector('.faq-a').style.maxHeight=null; });
+    if(!isActive){ item.classList.add('active'); a.style.maxHeight = a.scrollHeight+'px'; }
+  });
+});
+
+/* ===== Contact form ===== */
+document.getElementById('contactForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  document.getElementById('formSuccess').classList.add('show');
+  this.reset();
+  setTimeout(()=> document.getElementById('formSuccess').classList.remove('show'), 4000);
+});
+</script>
+</body>
+</html>
