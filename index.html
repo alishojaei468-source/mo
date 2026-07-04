@@ -991,13 +991,19 @@ document.querySelectorAll('.faq-item').forEach(item=>{
 });
 
 /* Contact form */
-const TG_BOT_TOKEN=['8865680604','AAFaqcXLFmEJ81W6Kcg8ZxGCxbLawlojyU8'].join(':');
-const TG_CHAT_ID='358735302';
+const MAKE_WEBHOOK_URL='https://hook.eu1.make.com/pjh2k1pw48ymv73dgp95xb8qgva9ua89';
 
 function sendToTelegram(name,phone,subject,msg){
-  const text=`📩 درخواست مشاوره جدید از سایت%0A%0A👤 نام: ${encodeURIComponent(name)}%0A📞 تماس: ${encodeURIComponent(phone)}%0A📝 موضوع: ${encodeURIComponent(subject||'—')}%0A💬 توضیحات: ${encodeURIComponent(msg||'—')}`;
-  const url=`https://api.telegram.org/bot${TG_BOT_TOKEN}/sendMessage?chat_id=${TG_CHAT_ID}&text=${text}`;
-  return fetch(url).catch(()=>{});
+  return fetch(MAKE_WEBHOOK_URL,{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({
+      name:name,
+      phone:phone,
+      subject:subject||'—',
+      message:msg||'—'
+    })
+  }).catch(()=>{});
 }
 
 const cForm=document.getElementById('contactForm');
