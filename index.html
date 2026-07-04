@@ -141,6 +141,8 @@ section{position:relative;padding:120px 0;}
 #portfolio{background:var(--bg-2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
 .portfolio-swiper{width:100%;padding:60px 0 40px;}
 .portfolio-swiper .swiper-slide{width:260px;height:462px;border-radius:22px;overflow:hidden;position:relative;background:#111;border:1px solid var(--border);cursor:pointer;}
+.portfolio-swiper .swiper-slide.post-slide{width:340px;height:340px;}
+@media(max-width:480px){.portfolio-swiper .swiper-slide.post-slide{width:260px;height:260px;}}
 .portfolio-swiper .swiper-slide-active{box-shadow:0 30px 70px -20px rgba(212,175,55,.35), 0 0 0 1px rgba(212,175,55,.4);}
 .slide-media{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
 .slide-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
@@ -302,6 +304,23 @@ footer{padding:50px 0 30px;border-top:1px solid var(--border);}
 .float-tg-label{position:absolute;left:66px;background:rgba(34,158,217,.95);color:#fff;padding:6px 14px;border-radius:8px;font-size:13px;font-weight:600;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .3s;}
 .float-tg:hover .float-tg-label{opacity:1;}
 @media(max-width:768px){.float-btns{left:16px;bottom:16px;}.float-btn{width:48px;height:48px;font-size:20px;}}
+
+/* Chat widget */
+.chat-widget{position:fixed;left:24px;bottom:90px;width:340px;max-width:calc(100vw - 32px);max-height:70vh;background:var(--bg-2);border:1px solid var(--border);border-radius:20px;box-shadow:0 20px 60px rgba(0,0,0,.6);z-index:1001;display:flex;flex-direction:column;overflow:hidden;transform:translateY(20px) scale(.96);opacity:0;pointer-events:none;transition:.3s ease;}
+.chat-widget.open{transform:translateY(0) scale(1);opacity:1;pointer-events:all;}
+.chat-header{background:linear-gradient(135deg,#229ED9,#1a7fad);padding:16px 18px;display:flex;justify-content:space-between;align-items:flex-start;}
+.chat-header h4{font-size:15px;color:#fff;margin-bottom:3px;}
+.chat-header span{font-size:11.5px;color:rgba(255,255,255,.85);}
+.chat-close{color:#fff;font-size:16px;background:rgba(255,255,255,.15);width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.chat-body{padding:16px;overflow-y:auto;flex:1;display:flex;flex-direction:column;gap:10px;max-height:220px;}
+.chat-bubble{max-width:85%;padding:10px 14px;border-radius:14px;font-size:13px;line-height:1.7;}
+.chat-bubble.bot{background:var(--card);border:1px solid var(--border);align-self:flex-start;border-bottom-left-radius:4px;}
+.chat-bubble.user{background:rgba(212,175,55,.12);border:1px solid rgba(212,175,55,.3);align-self:flex-end;border-bottom-right-radius:4px;color:var(--text);}
+.chat-form{padding:14px 16px;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:10px;}
+.chat-form input,.chat-form textarea{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:11px 13px;color:#fff;font-size:13px;font-family:inherit;}
+.chat-form textarea{min-height:64px;resize:none;}
+.chat-form input:focus,.chat-form textarea:focus{outline:none;border-color:var(--gold);}
+@media(max-width:480px){.chat-widget{left:8px;bottom:80px;}}
 @media(max-width:920px){.cursor-dot{display:none;}}
 </style>
 </head>
@@ -399,9 +418,9 @@ footer{padding:50px 0 30px;border-top:1px solid var(--border);}
       <p>بخشی از پروژه‌های اخیر تولید محتوا، فیلمبرداری و طراحی گرافیک</p>
     </div>
     <div class="portfolio-tabs reveal">
-      <button class="portfolio-tab active" data-filter="all">همه</button>
-      <button class="portfolio-tab" data-filter="video">ریلزها</button>
+      <button class="portfolio-tab active" data-filter="video">ریلزها</button>
       <button class="portfolio-tab" data-filter="image">استوری‌ها</button>
+      <button class="portfolio-tab" data-filter="post">پست‌ها</button>
     </div>
   </div>
   <div class="swiper portfolio-swiper">
@@ -631,11 +650,11 @@ footer{padding:50px 0 30px;border-top:1px solid var(--border);}
         </a>
         <a href="https://wa.me/989389457353" target="_blank" class="contact-item">
           <div class="contact-icon">💬</div>
-          <div><h5>جهت ارتباط در واتساپ،کلیک کنید</h5><span>۰۹۳۸-۹۴۵-۷۳۵۳</span></div>
+          <div><h5>جهت ارتباط در واتساپ،کلیک کنید</h5><span>۰۹۳۸۹۴۵۷۳۵۳</span></div>
         </a>
         <a href="tel:09387622519" class="contact-item">
           <div class="contact-icon">📞</div>
-          <div><h5>تماس مستقیم</h5><span>۰۹۳۸-۷۶۲-۲۵۱۹</span></div>
+          <div><h5>تماس مستقیم</h5><span>۰۹۳۸۷۶۲۲۵۱۹</span></div>
         </a>
         <a href="mailto:alish4978@gmail.com" class="contact-item">
           <div class="contact-icon">📧</div>
@@ -644,21 +663,21 @@ footer{padding:50px 0 30px;border-top:1px solid var(--border);}
       </div>
       <div style="margin-top:30px;">
         <h3 style="font-size:18px;margin-bottom:20px;font-weight:700;">یا فرم زیر را پر کنید</h3>
-        <form id="contactForm">
+        <form id="contactForm" action="https://formspree.io/f/maqglawv" method="POST">
           <div class="field">
-            <input type="text" id="fname" placeholder=" " required>
+            <input type="text" name="نام" id="fname" placeholder=" " required>
             <label for="fname">نام و نام خانوادگی</label>
           </div>
           <div class="field">
-            <input type="tel" id="fphone" placeholder=" " required>
+            <input type="tel" name="شماره_تماس" id="fphone" placeholder=" " required>
             <label for="fphone">شماره تماس</label>
           </div>
           <div class="field">
-            <input type="text" id="fsubject" placeholder=" ">
+            <input type="text" name="موضوع" id="fsubject" placeholder=" ">
             <label for="fsubject">موضوع همکاری</label>
           </div>
           <div class="field">
-            <textarea id="fmsg" placeholder=" "></textarea>
+            <textarea name="توضیحات" id="fmsg" placeholder=" "></textarea>
             <label for="fmsg">توضیحات پروژه</label>
           </div>
           <button type="submit" class="btn" style="width:100%;justify-content:center;border:none;">ارسال درخواست مشاوره رایگان</button>
@@ -671,11 +690,28 @@ footer{padding:50px 0 30px;border-top:1px solid var(--border);}
 
 <!-- FLOATING BUTTONS -->
 <div class="float-btns">
-  <a href="https://t.me/SAlishojaei" target="_blank" class="float-btn float-tg" title="مشاوره آنلاین در تلگرام">
+  <button class="float-btn float-tg" id="chatOpenBtn" title="مشاوره آنلاین">
     <span class="float-tg-label">مشاوره آنلاین</span>
     ✈️
-  </a>
+  </button>
   <button class="float-btn float-top" id="scrollTopBtn" title="بازگشت به بالا" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+</div>
+
+<!-- CHAT WIDGET -->
+<div id="chatWidget" class="chat-widget">
+  <div class="chat-header">
+    <div><h4>مشاوره آنلاین</h4><span>معمولاً در کمتر از چند ساعت پاسخ می‌دهیم</span></div>
+    <button id="chatCloseBtn" class="chat-close">✕</button>
+  </div>
+  <div class="chat-body" id="chatBody">
+    <div class="chat-bubble bot">سلام 👋 برای شروع مشاوره، لطفاً اطلاعاتتان را وارد کنید و پیامتان را بنویسید.</div>
+  </div>
+  <form id="chatForm" class="chat-form">
+    <input type="text" id="chatName" placeholder="نام و نام خانوادگی" required>
+    <input type="tel" id="chatPhone" placeholder="شماره تماس" required>
+    <textarea id="chatMsg" placeholder="پیام شما..." required></textarea>
+    <button type="submit" class="btn" style="width:100%;justify-content:center;border:none;">ارسال پیام</button>
+  </form>
 </div>
 
 <footer>
@@ -782,18 +818,17 @@ document.querySelectorAll('.counter-num').forEach(el=>{
 /* Portfolio data */
 const portfolioData=[
   {type:'video',src:'https://github.com/alishojaei468-source/mo/raw/refs/heads/main/CaptionO_20260620_220417151.mp4',title:'نمونه ویدیو تدوین شده نمایندگی باتری',cat:'ویدیو تبلیغاتی',badge:'ریلز'},
-  {type:'image',src:'https://raw.githubusercontent.com/alishojaei468-source/mo/refs/heads/main/10%D8%AA%DB%8C%D8%B1..jpg',title:'نمونه استوری طراحی شده',cat:'طراحی گرافیک',badge:'استوری'},
-  {type:'image',src:'https://raw.githubusercontent.com/alishojaei468-source/mo/refs/heads/main/12%D8%AA%DB%8C%D8%B1...jpg',title:'نمونه استوری طراحی شده',cat:'طراحی گرافیک',badge:'استوری'},
-  {type:'image',src:'https://raw.githubusercontent.com/alishojaei468-source/mo/refs/heads/main/13%D8%AA%DB%8C%D8%B1...jpg',title:'نمونه استوری طراحی شده',cat:'طراحی گرافیک',badge:'استوری'},
-  {type:'image',src:'https://raw.githubusercontent.com/alishojaei468-source/mo/refs/heads/main/d34.jpg',title:'طراحی پست',cat:'طراحی گرافیک',badge:'پست'},
-  {type:'image',src:'https://raw.githubusercontent.com/alishojaei468-source/mo/refs/heads/main/d44.jpg',title:'طراحی پست',cat:'طراحی گرافیک',badge:'پست'},
   {type:'video',src:'https://github.com/alishojaei468-source/mo/raw/refs/heads/main/videos/rayan1.mp4',title:'نمونه تدوین فروشگاه رایانه',cat:'تولید محتوا',badge:'ویدیو'},
   {type:'video',src:'https://github.com/alishojaei468-source/mo/raw/refs/heads/main/saat1.mp4',title:'نمونه تدوین فروشگاه ساعت',cat:'تولید محتوا',badge:'ویدیو'},
   {type:'video',src:'https://github.com/alishojaei468-source/mo/raw/refs/heads/main/lv_0_20251103133534.mp4',title:'نمونه تدوین فروشگاه رایانه',cat:'تولید محتوا',badge:'ویدیو'},
   {type:'video',src:'https://github.com/alishojaei468-source/mo/raw/refs/heads/main/videos/bmeysam.mp4',title:'نمونه تدوین فروشگاه باتری',cat:'تولید محتوا',badge:'ویدیو'},
   {type:'video',src:'https://github.com/alishojaei468-source/mo/raw/refs/heads/main/videos/rayan2.mp4',title:'نمونه تدوین فروشگاه رایانه',cat:'تولید محتوا',badge:'ویدیو'},
   {type:'video',src:'https://github.com/alishojaei468-source/mo/raw/refs/heads/main/videos/bmeysam2.mp4',title:'نمونه تدوین فروشگاه باتری',cat:'تولید محتوا',badge:'ویدیو'},
-
+  {type:'image',src:'https://raw.githubusercontent.com/alishojaei468-source/mo/refs/heads/main/10%D8%AA%DB%8C%D8%B1..jpg',title:'نمونه استوری طراحی شده',cat:'طراحی گرافیک',badge:'استوری'},
+  {type:'image',src:'https://raw.githubusercontent.com/alishojaei468-source/mo/refs/heads/main/12%D8%AA%DB%8C%D8%B1...jpg',title:'نمونه استوری طراحی شده',cat:'طراحی گرافیک',badge:'استوری'},
+  {type:'image',src:'https://raw.githubusercontent.com/alishojaei468-source/mo/refs/heads/main/13%D8%AA%DB%8C%D8%B1...jpg',title:'نمونه استوری طراحی شده',cat:'طراحی گرافیک',badge:'استوری'},
+  {type:'post',src:'https://raw.githubusercontent.com/alishojaei468-source/mo/refs/heads/main/d34.jpg',title:'طراحی پست اینستاگرام',cat:'طراحی گرافیک',badge:'پست'},
+  {type:'post',src:'https://raw.githubusercontent.com/alishojaei468-source/mo/refs/heads/main/d44.jpg',title:'طراحی پست اینستاگرام',cat:'طراحی گرافیک',badge:'پست'},
 ];
 
 const wrapper=document.getElementById('portfolioWrapper');
@@ -803,7 +838,7 @@ let filteredData=portfolioData;
 
 function buildSlide(item,realIdx){
   const slide=document.createElement('div');
-  slide.className='swiper-slide';
+  slide.className='swiper-slide'+(item.type==='post'?' post-slide':'');
   slide.dataset.realIdx=realIdx;
   if(item.type==='video'){
     slide.innerHTML=`
@@ -845,7 +880,7 @@ function buildSlide(item,realIdx){
 function renderPortfolio(filter){
   currentFilter=filter;
   wrapper.innerHTML='';
-  filteredData = filter==='all' ? portfolioData : portfolioData.filter(it=>it.type===filter);
+  filteredData = portfolioData.filter(it=>it.type===filter);
   filteredData.forEach(item=>{
     const realIdx=portfolioData.indexOf(item);
     wrapper.appendChild(buildSlide(item,realIdx));
@@ -854,18 +889,32 @@ function renderPortfolio(filter){
   portfolioSwiper=new Swiper('.portfolio-swiper',{
     effect:'coverflow',grabCursor:true,centeredSlides:true,slidesPerView:'auto',
     loop:filteredData.length>2,
-    autoplay:{delay:5000,disableOnInteraction:false},
+    autoplay:{delay:90000,disableOnInteraction:false},
     coverflowEffect:{rotate:35,stretch:0,depth:200,modifier:1,slideShadows:false},
     mousewheel:{forceToAxis:true},keyboard:{enabled:true},
-    on:{slideChange(){
-      document.querySelectorAll('.slide-video').forEach(v=>{v.pause();});
+    on:{slideChangeTransitionStart(){
+      // Fully stop and reset every video (pause + rewind) to kill overlapping audio
+      document.querySelectorAll('.slide-video').forEach(v=>{
+        v.pause();
+        v.currentTime=0;
+        v.muted=true;
+        const parentSlide=v.closest('.swiper-slide');
+        if(parentSlide){
+          const playBtn=parentSlide.querySelector('.play-btn');
+          const muteBtn=parentSlide.querySelector('.mute-btn');
+          if(playBtn) playBtn.textContent='▶';
+          if(muteBtn) muteBtn.textContent='🔊';
+        }
+      });
+    },
+    slideChangeTransitionEnd(){
       const activeSlide=document.querySelector('.swiper-slide-active');
       const activeVideo=activeSlide&&activeSlide.querySelector('video');
-      if(activeVideo) activeVideo.play().catch(()=>{});
+      if(activeVideo){ activeVideo.currentTime=0; }
     }}
   });
 }
-renderPortfolio('all');
+renderPortfolio('video');
 
 document.getElementById('prevSlide').addEventListener('click',()=>portfolioSwiper.slidePrev());
 document.getElementById('nextSlide').addEventListener('click',()=>portfolioSwiper.slideNext());
@@ -942,16 +991,45 @@ document.querySelectorAll('.faq-item').forEach(item=>{
 });
 
 /* Contact form */
+const TG_BOT_TOKEN=['8865680604','AAFaqcXLFmEJ81W6Kcg8ZxGCxbLawlojyU8'].join(':');
+const TG_CHAT_ID='358735302';
+
+function sendToTelegram(name,phone,subject,msg){
+  const text=`📩 درخواست مشاوره جدید از سایت%0A%0A👤 نام: ${encodeURIComponent(name)}%0A📞 تماس: ${encodeURIComponent(phone)}%0A📝 موضوع: ${encodeURIComponent(subject||'—')}%0A💬 توضیحات: ${encodeURIComponent(msg||'—')}`;
+  const url=`https://api.telegram.org/bot${TG_BOT_TOKEN}/sendMessage?chat_id=${TG_CHAT_ID}&text=${text}`;
+  return fetch(url).catch(()=>{});
+}
+
 const cForm=document.getElementById('contactForm');
 if(cForm){
   cForm.addEventListener('submit',function(e){
     e.preventDefault();
     const name=document.getElementById('fname').value.trim();
     const phone=document.getElementById('fphone').value.trim();
+    const subject=document.getElementById('fsubject').value.trim();
+    const msg=document.getElementById('fmsg').value.trim();
     if(!name||!phone){alert('لطفاً نام و شماره تماس را وارد کنید.');return;}
-    document.getElementById('formSuccess').classList.add('show');
-    cForm.reset();
-    setTimeout(()=>document.getElementById('formSuccess').classList.remove('show'),5000);
+    const submitBtn=cForm.querySelector('button[type="submit"]');
+    const originalText=submitBtn.textContent;
+    submitBtn.textContent='در حال ارسال...';
+    submitBtn.disabled=true;
+    Promise.all([
+      fetch(cForm.action,{method:'POST',body:new FormData(cForm),headers:{'Accept':'application/json'}}),
+      sendToTelegram(name,phone,subject,msg)
+    ]).then(([res])=>{
+      if(res.ok){
+        document.getElementById('formSuccess').classList.add('show');
+        cForm.reset();
+      } else {
+        alert('مشکلی پیش آمد. لطفاً از راه‌های ارتباطی دیگر مثل واتساپ یا تماس مستقیم استفاده کنید.');
+      }
+    }).catch(()=>{
+      alert('مشکلی پیش آمد. لطفاً از راه‌های ارتباطی دیگر مثل واتساپ یا تماس مستقیم استفاده کنید.');
+    }).finally(()=>{
+      submitBtn.textContent=originalText;
+      submitBtn.disabled=false;
+      setTimeout(()=>document.getElementById('formSuccess').classList.remove('show'),6000);
+    });
   });
 }
 
@@ -959,6 +1037,45 @@ if(cForm){
 const scrollTopBtn=document.getElementById('scrollTopBtn');
 window.addEventListener('scroll',()=>{
   scrollTopBtn.classList.toggle('visible',window.scrollY>400);
+});
+
+/* Chat widget */
+const chatWidget=document.getElementById('chatWidget');
+const chatOpenBtn=document.getElementById('chatOpenBtn');
+const chatCloseBtn=document.getElementById('chatCloseBtn');
+const chatBody=document.getElementById('chatBody');
+const chatForm=document.getElementById('chatForm');
+
+chatOpenBtn.addEventListener('click',()=>chatWidget.classList.toggle('open'));
+chatCloseBtn.addEventListener('click',()=>chatWidget.classList.remove('open'));
+
+function addBubble(text,type){
+  const b=document.createElement('div');
+  b.className='chat-bubble '+type;
+  b.textContent=text;
+  chatBody.appendChild(b);
+  chatBody.scrollTop=chatBody.scrollHeight;
+}
+
+chatForm.addEventListener('submit',function(e){
+  e.preventDefault();
+  const name=document.getElementById('chatName').value.trim();
+  const phone=document.getElementById('chatPhone').value.trim();
+  const msg=document.getElementById('chatMsg').value.trim();
+  if(!name||!phone||!msg) return;
+
+  addBubble(msg,'user');
+
+  const submitBtn=chatForm.querySelector('button[type="submit"]');
+  submitBtn.disabled=true;
+  submitBtn.textContent='در حال ارسال...';
+
+  sendToTelegram(name,phone,'چت آنلاین سایت',msg).finally(()=>{
+    addBubble('✅ پیام شما ارسال شد و از طریق شماره '+phone+' با شما ارتباط برقرار می‌شود. ممنون از صبرتان 🌹','bot');
+    document.getElementById('chatMsg').value='';
+    submitBtn.disabled=false;
+    submitBtn.textContent='ارسال پیام';
+  });
 });
 </script>
 </body>
