@@ -49,8 +49,8 @@
   --border:rgba(255,255,255,.08);
 }
 *{margin:0;padding:0;box-sizing:border-box;}
-html{scroll-behavior:smooth;}
-body{font-family:'Vazirmatn',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;cursor:default;}
+html{scroll-behavior:smooth;overflow-x:hidden;}
+body{font-family:'Vazirmatn',sans-serif;background:var(--bg);color:var(--text);cursor:default;}
 ::selection{background:var(--gold);color:#090909;}
 a{text-decoration:none;color:inherit;}
 ul{list-style:none;}
@@ -296,7 +296,7 @@ footer{padding:50px 0 30px;border-top:1px solid var(--border);}
 .cursor-dot{position:fixed;width:10px;height:10px;border-radius:50%;background:var(--gold);pointer-events:none;z-index:9998;transform:translate(-50%,-50%);mix-blend-mode:difference;}
 /* Floating buttons */
 .float-btns{position:fixed;left:24px;bottom:24px;display:flex;flex-direction:column;gap:12px;z-index:999;}
-.float-btn{width:54px;height:54px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;box-shadow:0 4px 20px rgba(0,0,0,.4);transition:transform .3s,box-shadow .3s;cursor:pointer;text-decoration:none;}
+.float-btn{position:relative;width:54px;height:54px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;box-shadow:0 4px 20px rgba(0,0,0,.4);transition:transform .3s,box-shadow .3s;cursor:pointer;text-decoration:none;}
 .float-btn:hover{transform:translateY(-4px) scale(1.08);box-shadow:0 8px 28px rgba(0,0,0,.5);}
 .float-tg{background:linear-gradient(135deg,#229ED9,#1a7fad);color:#fff;}
 .float-top{background:var(--card);border:1px solid var(--border);color:var(--gold);opacity:0;pointer-events:none;transition:opacity .3s,transform .3s;}
@@ -304,6 +304,26 @@ footer{padding:50px 0 30px;border-top:1px solid var(--border);}
 .float-tg-label{position:absolute;left:66px;background:rgba(34,158,217,.95);color:#fff;padding:6px 14px;border-radius:8px;font-size:13px;font-weight:600;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .3s;}
 .float-tg:hover .float-tg-label{opacity:1;}
 @media(max-width:768px){.float-btns{left:16px;bottom:16px;}.float-btn{width:48px;height:48px;font-size:20px;}}
+
+/* Chat button attention effects */
+.float-tg::before,.float-tg::after{content:'';position:absolute;inset:0;border-radius:50%;border:2px solid #34b3f1;opacity:0;pointer-events:none;}
+.float-tg::before{animation:pulseRing 2.6s ease-out infinite;}
+.float-tg::after{animation:pulseRing 2.6s ease-out infinite;animation-delay:1.3s;}
+@keyframes pulseRing{
+  0%{transform:scale(1);opacity:.7;}
+  100%{transform:scale(2.1);opacity:0;}
+}
+.float-tg{animation:btnBounce 4.5s ease-in-out infinite;}
+@keyframes btnBounce{
+  0%,80%,100%{transform:translateY(0);}
+  84%{transform:translateY(-8px);}
+  88%{transform:translateY(0);}
+  92%{transform:translateY(-4px);}
+  96%{transform:translateY(0);}
+}
+.float-tg:hover{animation-play-state:paused;}
+.chat-notif-badge{position:absolute;top:-4px;right:-4px;width:20px;height:20px;border-radius:50%;background:#ff3b30;color:#fff;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;border:2px solid var(--bg);opacity:0;transform:scale(0);transition:opacity .3s,transform .3s;}
+.chat-notif-badge.show{opacity:1;transform:scale(1);}
 
 /* Chat widget */
 .chat-widget{position:fixed;left:24px;bottom:90px;width:340px;max-width:calc(100vw - 32px);max-height:70vh;background:var(--bg-2);border:1px solid var(--border);border-radius:20px;box-shadow:0 20px 60px rgba(0,0,0,.6);z-index:1001;display:flex;flex-direction:column;overflow:hidden;transform:translateY(20px) scale(.96);opacity:0;pointer-events:none;transition:.3s ease;}
@@ -692,6 +712,7 @@ footer{padding:50px 0 30px;border-top:1px solid var(--border);}
 <div class="float-btns">
   <button class="float-btn float-tg" id="chatOpenBtn" title="مشاوره آنلاین">
     <span class="float-tg-label">مشاوره آنلاین</span>
+    <span class="chat-notif-badge" id="chatNotifBadge">1</span>
     ✈️
   </button>
   <button class="float-btn float-top" id="scrollTopBtn" title="بازگشت به بالا" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
@@ -1052,7 +1073,15 @@ const chatCloseBtn=document.getElementById('chatCloseBtn');
 const chatBody=document.getElementById('chatBody');
 const chatForm=document.getElementById('chatForm');
 
-chatOpenBtn.addEventListener('click',()=>chatWidget.classList.toggle('open'));
+chatOpenBtn.addEventListener('click',()=>{
+  chatWidget.classList.toggle('open');
+  const badge=document.getElementById('chatNotifBadge');
+  if(badge) badge.classList.remove('show');
+});
+setTimeout(()=>{
+  const badge=document.getElementById('chatNotifBadge');
+  if(badge) badge.classList.add('show');
+},4000);
 chatCloseBtn.addEventListener('click',()=>chatWidget.classList.remove('open'));
 
 function addBubble(text,type){
