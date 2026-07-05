@@ -50,7 +50,7 @@
 }
 *{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;overflow-x:hidden;-webkit-text-size-adjust:100%;text-size-adjust:100%;}
-body{font-family:'Vazirmatn',sans-serif;background:var(--bg);color:var(--text);cursor:default;-webkit-text-size-adjust:100%;text-size-adjust:100%;}
+body{font-family:'Vazirmatn',sans-serif;background:var(--bg);color:var(--text);cursor:default;-webkit-text-size-adjust:100%;text-size-adjust:100%;overflow-x:hidden;}
 ::selection{background:var(--gold);color:#090909;}
 a{text-decoration:none;color:inherit;}
 ul{list-style:none;}
@@ -106,6 +106,7 @@ nav a:hover::after{width:100%;}
 /* Hero */
 #hero{position:relative;min-height:100vh;display:flex;align-items:center;padding-top:140px;padding-bottom:80px;overflow:hidden;}
 .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:50px;align-items:center;}
+.hero-grid>*{min-width:0;}
 @media(max-width:920px){.hero-grid{grid-template-columns:1fr;}}
 .hero-glow{position:absolute;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(212,175,55,.18),transparent 70%);top:-220px;right:-220px;filter:blur(10px);pointer-events:none;}
 .particle{position:absolute;width:5px;height:5px;border-radius:50%;background:var(--gold);opacity:.5;pointer-events:none;}
@@ -226,10 +227,14 @@ section{position:relative;padding:120px 0;}
 
 /* About */
 .about-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:60px;align-items:center;}
+.about-grid>*{min-width:0;}
 @media(max-width:920px){.about-grid{grid-template-columns:1fr;}}
-.about-portrait{aspect-ratio:3/4;border-radius:24px;overflow:hidden;border:1px solid var(--border);}
+.about-portrait{aspect-ratio:3/4;border-radius:24px;overflow:hidden;border:1px solid var(--border);width:100%;}
 .about-portrait img{width:100%;height:100%;object-fit:cover;object-position:top;}
 .about-counters{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:30px;}
+@media(max-width:480px){.about-counters{grid-template-columns:1fr;}}
+.faq-contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;}
+@media(max-width:920px){.faq-contact-grid{grid-template-columns:1fr;gap:50px;}}
 .about-counters div{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:20px;text-align:center;}
 
 /* Process */
@@ -327,9 +332,10 @@ footer{padding:50px 0 30px;border-top:1px solid var(--border);}
 .chat-notif-badge.show{opacity:1;transform:scale(1);}
 
 /* Smart calculator */
-.calc-box{margin-top:70px;background:linear-gradient(160deg,#1c1a13,#141414);border:1.5px solid var(--gold);border-radius:26px;padding:44px 40px;max-width:680px;margin-inline:auto;}
-@media(max-width:600px){.calc-box{padding:30px 22px;}}
-.calc-head h3{font-size:22px;margin-bottom:8px;}
+.calc-box{margin-top:60px;background:var(--card);border:1px solid var(--border);border-radius:24px;padding:40px 30px;max-width:600px;margin-inline:auto;position:relative;overflow:hidden;}
+.calc-box::before{content:'';position:absolute;top:-1.5px;right:-1.5px;left:-1.5px;height:3px;background:linear-gradient(90deg,var(--gold),var(--gold-hover));border-radius:24px 24px 0 0;}
+@media(max-width:600px){.calc-box{padding:28px 20px;}}
+.calc-head h3{font-size:19px;margin-bottom:8px;}
 .calc-sliders{margin:32px 0;display:flex;flex-direction:column;gap:26px;}
 .calc-label{display:flex;justify-content:space-between;font-size:14px;margin-bottom:10px;}
 .calc-value{color:var(--gold);font-weight:800;}
@@ -338,7 +344,7 @@ footer{padding:50px 0 30px;border-top:1px solid var(--border);}
 .calc-item input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:var(--gold);cursor:pointer;border:none;box-shadow:0 4px 12px rgba(212,175,55,.5);}
 .calc-result{text-align:center;padding:24px;background:rgba(212,175,55,.08);border-radius:16px;margin-bottom:16px;}
 .calc-result span{font-size:13px;color:var(--text-2);display:block;margin-bottom:8px;}
-.calc-price{font-size:36px;font-weight:800;color:var(--gold);}
+.calc-price{font-size:34px;font-weight:800;color:var(--gold);}
 .calc-price small{font-size:14px;color:var(--text-2);font-weight:400;}
 
 /* Voice intro button */
@@ -691,7 +697,7 @@ footer{padding:50px 0 30px;border-top:1px solid var(--border);}
 
 <!-- FAQ & CONTACT -->
 <section id="faq-contact" style="background:var(--bg-2);border-top:1px solid var(--border);">
-  <div class="container" style="display:grid;grid-template-columns:1fr 1fr;gap:60px;">
+  <div class="container faq-contact-grid">
     <div class="reveal">
       <div class="eyebrow">سوالات متداول</div>
       <h2 class="section-title" style="margin-bottom:30px;">سوالات پرتکرار</h2>
