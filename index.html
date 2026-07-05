@@ -101,6 +101,8 @@ nav a:hover::after{width:100%;}
 .mobile-menu{position:fixed;inset:0;background:#0a0a0aee;backdrop-filter:blur(20px);z-index:1100;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:30px;transform:translateY(-100%);transition:transform .5s cubic-bezier(.2,.8,.2,1);}
 .mobile-menu.open{transform:translateY(0);}
 .mobile-menu a{font-size:22px;font-weight:700;color:var(--text);}
+.mobile-social-row{display:flex;gap:16px;margin-top:10px;}
+.mobile-social-row .icon-link{width:46px;height:46px;font-size:19px;}
 .mobile-close{position:absolute;top:30px;left:30px;font-size:28px;color:var(--gold);cursor:pointer;}
 
 /* Hero */
@@ -332,7 +334,14 @@ footer{padding:50px 0 30px;border-top:1px solid var(--border);}
 .chat-notif-badge.show{opacity:1;transform:scale(1);}
 
 /* Smart calculator */
-.calc-box{margin-top:60px;background:var(--card);border:1px solid var(--border);border-radius:24px;padding:40px 30px;max-width:600px;margin-inline:auto;position:relative;overflow:hidden;}
+.calc-toggle-wrap{text-align:center;margin-top:50px;}
+.calc-toggle-btn{display:inline-flex;align-items:center;gap:12px;padding:16px 30px;border-radius:50px;background:linear-gradient(135deg,var(--gold),var(--gold-hover));color:#0a0a0a;font-weight:700;font-size:15px;box-shadow:0 10px 30px -10px rgba(212,175,55,.45);transition:.3s;}
+.calc-toggle-btn:hover{transform:translateY(-2px);box-shadow:0 16px 36px -10px rgba(212,175,55,.6);}
+.calc-toggle-icon{font-size:19px;}
+.calc-toggle-arrow{transition:transform .3s;font-size:13px;}
+.calc-toggle-btn.open .calc-toggle-arrow{transform:rotate(180deg);}
+.calc-box{margin-top:24px;max-height:0;opacity:0;overflow:hidden;background:var(--card);border:1px solid var(--border);border-radius:24px;padding:0 30px;max-width:600px;margin-inline:auto;position:relative;transition:max-height .5s ease,opacity .4s ease,padding .5s ease;}
+.calc-box.open{max-height:900px;opacity:1;padding:40px 30px;}
 .calc-box::before{content:'';position:absolute;top:-1.5px;right:-1.5px;left:-1.5px;height:3px;background:linear-gradient(90deg,var(--gold),var(--gold-hover));border-radius:24px 24px 0 0;}
 @media(max-width:600px){.calc-box{padding:28px 20px;}}
 .calc-head h3{font-size:19px;margin-bottom:8px;}
@@ -414,8 +423,11 @@ footer{padding:50px 0 30px;border-top:1px solid var(--border);}
   <a href="#pricing">تعرفه‌ها</a>
   <a href="#about">درباره من</a>
   <a href="#contact">تماس</a>
-  <a href="https://instagram.com/shojalii" target="_blank" style="color:var(--gold);">اینستاگرام: shojalii@</a>
-  <a href="https://t.me/SAlishojaei" target="_blank" style="color:var(--gold);">تلگرام: SAlishojaei@</a>
+  <div class="mobile-social-row">
+    <a href="https://instagram.com/shojalii" target="_blank" class="icon-link" title="اینستاگرام">📷</a>
+    <a href="https://t.me/SAlishojaei" target="_blank" class="icon-link" title="تلگرام">✈️</a>
+    <a href="https://wa.me/989389457353" target="_blank" class="icon-link" title="واتساپ">💬</a>
+  </div>
 </div>
 
 <!-- HERO -->
@@ -587,7 +599,14 @@ footer{padding:50px 0 30px;border-top:1px solid var(--border);}
     </div>
 
     <!-- SMART CALCULATOR -->
-    <div class="calc-box reveal">
+    <div class="calc-toggle-wrap reveal">
+      <button id="calcToggleBtn" class="calc-toggle-btn">
+        <span class="calc-toggle-icon">🧮</span>
+        <span>بسنج پروژه‌ات چقدر هزینه داره</span>
+        <span class="calc-toggle-arrow">▾</span>
+      </button>
+    </div>
+    <div class="calc-box" id="calcBox">
       <div class="calc-head">
         <div class="eyebrow" style="margin-bottom:10px;">ماشین‌حساب هوشمند پروژه</div>
         <h3>نمی‌دونی چقدر باید هزینه کنی؟ اینجا بسنج</h3>
@@ -930,6 +949,17 @@ function updateCalc(){
   if(el) el.addEventListener('input',updateCalc);
 });
 if(calcPost) updateCalc();
+
+/* Calculator toggle */
+const calcToggleBtn=document.getElementById('calcToggleBtn');
+const calcBox=document.getElementById('calcBox');
+if(calcToggleBtn&&calcBox){
+  calcToggleBtn.addEventListener('click',()=>{
+    const isOpen=calcBox.classList.toggle('open');
+    calcToggleBtn.classList.toggle('open',isOpen);
+    if(isOpen) calcBox.scrollIntoView({behavior:'smooth',block:'center'});
+  });
+}
 
 /* Hero animation */
 function playHero(){
