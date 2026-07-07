@@ -1197,8 +1197,18 @@ document.querySelectorAll('.faq-item').forEach(item=>{
 
 /* Contact form */
 const MAKE_WEBHOOK_URL='https://hook.eu1.make.com/pjh2k1pw48ymv73dgp95xb8qgva9ua89';
+const MAKE_READ_WEBHOOK_URL='https://hook.eu1.make.com/PLACEHOLDER_READ_WEBHOOK'; // باید بعد از ساخت سناریوی دوم در Make.com عوض شود
 
-function sendToTelegram(name,phone,subject,msg){
+function getSessionId(){
+  let sid=localStorage.getItem('chat_session_id');
+  if(!sid){
+    sid=Math.random().toString(36).slice(2,8).toUpperCase()+Date.now().toString(36).slice(-4).toUpperCase();
+    localStorage.setItem('chat_session_id',sid);
+  }
+  return sid;
+}
+
+function sendToTelegram(name,phone,subject,msg,sessionId){
   return fetch(MAKE_WEBHOOK_URL,{
     method:'POST',
     headers:{'Content-Type':'application/json'},
@@ -1206,7 +1216,8 @@ function sendToTelegram(name,phone,subject,msg){
       name:name,
       phone:phone,
       subject:subject||'—',
-      message:msg||'—'
+      message:msg||'—',
+      session_id:sessionId||''
     })
   }).catch(()=>{});
 }
@@ -1284,18 +1295,39 @@ chatForm.addEventListener('submit',function(e){
   if(!name||!phone||!msg) return;
 
   addBubble(msg,'user');
+  const sessionId=getSessionId();
 
   const submitBtn=chatForm.querySelector('button[type="submit"]');
   submitBtn.disabled=true;
   submitBtn.textContent='در حال ارسال...';
 
-  sendToTelegram(name,phone,'چت آنلاین سایت',msg).finally(()=>{
-    addBubble('✅ پیام شما ارسال شد و از طریق شماره '+phone+' با شما ارتباط برقرار می‌شود. ممنون از صبرتان 🌹','bot');
+  sendToTelegram(name,phone,'چت آنلاین سایت',msg,sessionId).finally(()=>{
+    addBubble('✅ پیام شما ارسال شد. به‌زودی همین‌جا جواب می‌گیرید 🌹','bot');
     document.getElementById('chatMsg').value='';
     submitBtn.disabled=false;
     submitBtn.textContent='ارسال پیام';
+    startReplyPolling(sessionId);
   });
 });
+
+/* Poll for Ali's reply from Telegram (via Make.com read webhook) */
+let pollInterval=null;
+let lastReplyTimestamp=0;
+function startReplyPolling(sessionId){
+  if(pollInterval) clearInterval(pollInterval);
+  pollInterval=setInterval(()=>{
+    fetch(MAKE_READ_WEBHOOK_URL,{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({session_id:sessionId})
+    }).then(res=>res.json()).then(data=>{
+      if(data&&data.reply&&data.timestamp>lastReplyTimestamp){
+        lastReplyTimestamp=data.timestamp;
+        addBubble(data.reply,'bot');
+      }
+    }).catch(()=>{});
+  },4000);
+}
 </script>
 </body>
 </html>
