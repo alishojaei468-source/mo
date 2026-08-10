@@ -351,6 +351,25 @@ footer{padding:50px 0 30px;border-top:1px solid var(--border);}
 .calc-item input[type=range]{-webkit-appearance:none;width:100%;height:6px;border-radius:6px;background:rgba(255,255,255,.1);outline:none;}
 .calc-item input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:var(--gold);cursor:pointer;box-shadow:0 4px 12px rgba(212,175,55,.5);}
 .calc-item input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:var(--gold);cursor:pointer;border:none;box-shadow:0 4px 12px rgba(212,175,55,.5);}
+.calc-edit-types{margin-bottom:24px;}
+.calc-edit-label{font-size:13px;color:var(--text-2);margin-bottom:12px;text-align:center;}
+.calc-edit-btns{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+@media(max-width:480px){.calc-edit-btns{grid-template-columns:1fr;}}
+.calc-edit-btn{display:flex;flex-direction:column;align-items:center;gap:4px;padding:12px 8px;border-radius:12px;border:1px solid var(--border);background:rgba(255,255,255,.02);color:var(--text-2);font-size:12.5px;font-weight:600;font-family:inherit;transition:transform .2s ease,box-shadow .25s ease,border-color .25s ease,background .25s ease,color .25s ease;}
+.calc-edit-btn small{font-size:10.5px;font-weight:400;opacity:.75;}
+.calc-edit-btn:hover{border-color:rgba(212,175,55,.4);transform:translateY(-2px);}
+.calc-edit-btn:active{transform:translateY(0) scale(.97);}
+.calc-edit-btn.active{background:linear-gradient(135deg,var(--gold),var(--gold-hover));color:#0a0a0a;border-color:transparent;box-shadow:0 8px 22px -8px rgba(212,175,55,.55);transform:translateY(-2px);}
+.calc-edit-btn.active small{color:#0a0a0a;opacity:.75;}
+.calc-actor-row{margin-bottom:24px;}
+.calc-actor-btn{width:100%;display:flex;align-items:center;justify-content:center;gap:10px;padding:13px;border-radius:12px;border:1px solid var(--border);background:rgba(255,255,255,.02);color:var(--text-2);font-size:13.5px;font-weight:600;font-family:inherit;transition:transform .2s ease,box-shadow .25s ease,border-color .25s ease,background .25s ease,color .25s ease;}
+.calc-actor-btn small{font-weight:400;opacity:.75;}
+.calc-actor-btn:hover{border-color:rgba(212,175,55,.35);}
+.calc-actor-btn:active{transform:scale(.985);}
+.calc-actor-check{width:18px;height:18px;border-radius:5px;border:1.5px solid var(--border);flex-shrink:0;transition:.25s;position:relative;}
+.calc-actor-btn.active{border-color:rgba(212,175,55,.5);background:rgba(212,175,55,.08);color:var(--text);box-shadow:0 6px 18px -10px rgba(212,175,55,.4);}
+.calc-actor-btn.active .calc-actor-check{background:var(--gold);border-color:var(--gold);transform:scale(1.08);}
+.calc-actor-btn.active .calc-actor-check::after{content:'✓';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:12px;color:#0a0a0a;font-weight:800;}
 .calc-result{text-align:center;padding:24px;background:rgba(212,175,55,.08);border-radius:16px;margin-bottom:16px;}
 .calc-result span{font-size:13px;color:var(--text-2);display:block;margin-bottom:8px;}
 .calc-price{font-size:34px;font-weight:800;color:var(--gold);}
@@ -559,12 +578,12 @@ footer{padding:50px 0 30px;border-top:1px solid var(--border);}
     <div class="pricing-grid">
       <div class="price-card reveal">
         <h3>⚡ اقتصادی</h3>
-        <div class="amount">۶,۵۰۰,۰۰۰ <small>تومان / ماه</small></div>
+        <div class="amount">۹,۵۰۰,۰۰۰ <small>تومان / ماه</small></div>
         <ul>
           <li><span class="ck">✓</span> فیلمبرداری با موبایل + تجهیزات پایه</li>
           <li><span class="ck">✓</span> تدوین ساده (تا ۳۰ ثانیه در ویدیو)</li>
           <li><span class="ck">✓</span> طراحی گرافیک ساده</li>
-          <li><span class="ck">✓</span> ۴ پست + ۱۰ استوری در ماه</li>
+          <li><span class="ck">✓</span> ۴ پست + ۱۵ استوری + ۶ ریلز در ماه</li>
           <li><span class="ck">✓</span> پشتیبانی تا ۳ روز</li>
         </ul>
         <p class="price-note">* قیمت و خدمات بر اساس نیاز شما قابل تنظیم است</p>
@@ -573,7 +592,7 @@ footer{padding:50px 0 30px;border-top:1px solid var(--border);}
       <div class="price-card featured reveal">
         <div class="ribbon">پیشنهاد ویژه</div>
         <h3 style="color:var(--gold);">✨ طلایی</h3>
-        <div class="amount">۱۵,۰۰۰,۰۰۰ <small>تومان / ماه</small></div>
+        <div class="amount">۲۰,۰۰۰,۰۰۰ <small>تومان / ماه</small></div>
         <ul>
           <li><span class="ck">✓</span> فیلمبرداری با تجهیزات حرفه‌ای</li>
           <li><span class="ck">✓</span> تدوین حرفه‌ای (ویدیوهای تا ۱۰ دقیقه)</li>
@@ -586,12 +605,12 @@ footer{padding:50px 0 30px;border-top:1px solid var(--border);}
       </div>
       <div class="price-card reveal">
         <h3>💎 نقره‌ای</h3>
-        <div class="amount">۱۰,۰۰۰,۰۰۰ <small>تومان / ماه</small></div>
+        <div class="amount">۱۵,۰۰۰,۰۰۰ <small>تومان / ماه</small></div>
         <ul>
           <li><span class="ck">✓</span> فیلمبرداری با تجهیزات پایه</li>
           <li><span class="ck">✓</span> تدوین نیمه‌حرفه‌ای (تا ۱ دقیقه)</li>
           <li><span class="ck">✓</span> طراحی گرافیک نیمه‌حرفه‌ای</li>
-          <li><span class="ck">✓</span> ۶ پست + ۱۵ استوری + ۵ ریلز در ماه</li>
+          <li><span class="ck">✓</span> ۶ پست + ۲۰ استوری + ۸ ریلز در ماه</li>
           <li><span class="ck">✓</span> پشتیبانی تا ۷ روز</li>
         </ul>
         <p class="price-note">* قیمت و خدمات بر اساس نیاز شما قابل تنظیم است</p>
@@ -624,8 +643,22 @@ footer{padding:50px 0 30px;border-top:1px solid var(--border);}
         </div>
         <div class="calc-item">
           <div class="calc-label"><span>🎬 ریلز</span><span class="calc-value" id="calcReelVal">0</span></div>
-          <input type="range" id="calcReel" min="0" max="12" value="0" step="1">
+          <input type="range" id="calcReel" min="0" max="20" value="0" step="1">
         </div>
+      </div>
+      <div class="calc-edit-types">
+        <div class="calc-edit-label">نوع ادیت ریلزها (اختیاری)</div>
+        <div class="calc-edit-btns">
+          <button type="button" class="calc-edit-btn" data-edit="simple" data-price="200000">ادیت ساده<small>۲۰۰هزار / ریلز</small></button>
+          <button type="button" class="calc-edit-btn" data-edit="semi" data-price="350000">ادیت نیمه‌حرفه‌ای<small>۳۵۰هزار / ریلز</small></button>
+          <button type="button" class="calc-edit-btn" data-edit="pro" data-price="500000">ادیت حرفه‌ای<small>۵۰۰هزار / ریلز</small></button>
+        </div>
+      </div>
+      <div class="calc-actor-row">
+        <button type="button" id="calcActorBtn" class="calc-actor-btn">
+          <span class="calc-actor-check"></span>
+          <span>🎭 بازیگر <small>(+۵,۰۰۰,۰۰۰ تومان)</small></span>
+        </button>
       </div>
       <div class="calc-result">
         <span>هزینه تخمینی ماهانه</span>
@@ -921,6 +954,7 @@ if(voiceBtn&&voiceAudio){
 const PRICE_PER_POST=300000;
 const PRICE_PER_STORY=150000;
 const PRICE_PER_REEL=1000000;
+const ACTOR_PRICE=5000000;
 
 const calcPost=document.getElementById('calcPost');
 const calcStory=document.getElementById('calcStory');
@@ -929,6 +963,11 @@ const calcPostVal=document.getElementById('calcPostVal');
 const calcStoryVal=document.getElementById('calcStoryVal');
 const calcReelVal=document.getElementById('calcReelVal');
 const calcPriceOut=document.getElementById('calcPriceOut');
+const calcEditBtns=document.querySelectorAll('.calc-edit-btn');
+const calcActorBtn=document.getElementById('calcActorBtn');
+
+let selectedEditPrice=0;
+let actorSelected=false;
 
 function toPersianDigits(str){
   const fa=['۰','۱','۲','۳','۴','۵','۶','۷','۸','۹'];
@@ -942,13 +981,38 @@ function updateCalc(){
   calcPostVal.textContent=toPersianDigits(posts);
   calcStoryVal.textContent=toPersianDigits(stories);
   calcReelVal.textContent=toPersianDigits(reels);
-  const total=(posts*PRICE_PER_POST)+(stories*PRICE_PER_STORY)+(reels*PRICE_PER_REEL);
+  let total=(posts*PRICE_PER_POST)+(stories*PRICE_PER_STORY)+(reels*PRICE_PER_REEL);
+  total+=reels*selectedEditPrice;
+  if(actorSelected) total+=ACTOR_PRICE;
   const rounded=Math.round(total/50000)*50000;
   calcPriceOut.innerHTML=formatToman(rounded)+' <small>تومان</small>';
 }
 [calcPost,calcStory,calcReel].forEach(el=>{
   if(el) el.addEventListener('input',updateCalc);
 });
+
+calcEditBtns.forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const isActive=btn.classList.contains('active');
+    calcEditBtns.forEach(b=>b.classList.remove('active'));
+    if(isActive){
+      selectedEditPrice=0; // toggle off if clicking the already-active one
+    } else {
+      btn.classList.add('active');
+      selectedEditPrice=+btn.dataset.price;
+    }
+    updateCalc();
+  });
+});
+
+if(calcActorBtn){
+  calcActorBtn.addEventListener('click',()=>{
+    actorSelected=!actorSelected;
+    calcActorBtn.classList.toggle('active',actorSelected);
+    updateCalc();
+  });
+}
+
 if(calcPost) updateCalc();
 
 /* Calculator toggle */
